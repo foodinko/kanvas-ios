@@ -341,9 +341,11 @@ final class MovableViewCanvas: IgnoreTouchesView, UIGestureRecognizerDelegate, M
             movableView.fadeOut()
             touchPosition = recognizer.touchLocations
             trashView.changeStatus(touchPosition)
+            self.bringSubviewToFront(trashView)
         case .changed:
             touchPosition = recognizer.touchLocations
             trashView.changeStatus(touchPosition)
+            self.bringSubviewToFront(trashView)
         case .ended, .cancelled, .failed:
             if trashView.contains(touchPosition) {
                 movableView.remove()
@@ -381,7 +383,7 @@ final class MovableViewCanvas: IgnoreTouchesView, UIGestureRecognizerDelegate, M
     
     func didTapImageView(movableView: MovableView, imageView: StylableImageView) {
         if let frontView = subviews.last, frontView != movableView {
-            bringSubviewToFront(movableView)
+//            bringSubviewToFront(movableView)
         }
         else if let stickerImage = imageView.image {
             imageView.image = stickerImage.withHorizontallyFlippedOrientation()

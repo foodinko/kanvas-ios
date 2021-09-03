@@ -68,8 +68,6 @@ private enum ShootButtonState {
 final class ShootButtonView: IgnoreTouchesView, UIDropInteractionDelegate {
 
     weak var delegate: ShootButtonViewDelegate?
-    
-    let trashView: TrashView
 
     private let containerView: UIView
     private let imageView: UIImageView
@@ -78,6 +76,7 @@ final class ShootButtonView: IgnoreTouchesView, UIDropInteractionDelegate {
     private let tapRecognizer: UITapGestureRecognizer
     private let longPressRecognizer: UILongPressGestureRecognizer
     private let borderView: UIView
+    private let trashView: TrashView
     private let baseColor: UIColor
 
     private var containerWidthConstraint: NSLayoutConstraint?

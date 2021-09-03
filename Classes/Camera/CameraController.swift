@@ -174,9 +174,6 @@ open class CameraController: UIViewController, MediaClipsEditorDelegate, CameraP
     }()
     private lazy var modeAndShootController: ModeSelectorAndShootController = {
         let controller = ModeSelectorAndShootController(settings: self.settings)
-        controller.modeView.shootButton.trashView.completion = { [weak self] in
-            self?.clipsController.removeDraggingClip()
-        }
         controller.delegate = self
         return controller
     }()
@@ -408,9 +405,6 @@ open class CameraController: UIViewController, MediaClipsEditorDelegate, CameraP
                                               quickBlogSelectorCoordinator: quickBlogSelectorCoordinator,
                                               edit: edit,
                                               tagCollection: tagCollection)
-        controller.editorView.movableViewCanvas.trashCompletion = { [weak self] in
-            self?.clipsController.removeDraggingClip()
-        }
         controller.delegate = self
         return controller
     }
@@ -861,7 +855,10 @@ open class CameraController: UIViewController, MediaClipsEditorDelegate, CameraP
     }
     
     func nextButtonWasPressed() {
-        showPreviewWithSegments(cameraInputController.segments(), selected: segments.startIndex)
+        if let lastSegment = cameraInputController.segments().last {
+            let segments = [lastSegment]
+            showPreviewWithSegments(segments, selected: segments.startIndex)
+        }
         analyticsProvider?.logNextTapped()
     }
     
