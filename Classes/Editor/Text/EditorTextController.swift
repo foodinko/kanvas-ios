@@ -153,7 +153,7 @@ final class EditorTextController: UIViewController, EditorTextViewDelegate, Colo
     }
     
     private func setUpView() {
-        textView.alpha = 0
+        textView.alpha = 1
     }
     
     private func prepareForText(_ options: TextOptions, _ transformations: ViewTransformations) {

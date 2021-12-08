@@ -37,24 +37,14 @@ final class EditionMenuCollectionController: UIViewController, KanvasEditorMenuC
         self.shouldExportMediaAsGIF = shouldExportMediaAsGIF ?? false
 
         if settings.features.gifs && shouldExportMediaAsGIF != nil {
-            editionOptions.append(.gif)
+            
         }
         
-        if settings.features.editorFilters {
-            editionOptions.append(.filter)
-        }
-        
-        if settings.features.editorText {
-            editionOptions.append(.text)
-        }
-        
-        if settings.features.editorMedia {
-            editionOptions.append(.media)
-        }
-        
-        if settings.features.editorDrawing {
-            editionOptions.append(.drawing)
-        }
+        // 정렬를 위해 다 넣고 cellForItemAt 에서 hidden 처리
+        editionOptions.append(.gif)
+        editionOptions.append(.filter)
+        editionOptions.append(.text)
+        editionOptions.append(.media)
         
         super.init(nibName: .none, bundle: .none)
     }
@@ -125,6 +115,10 @@ final class EditionMenuCollectionController: UIViewController, KanvasEditorMenuC
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditionMenuCollectionCell.identifier, for: indexPath)
         if let cell = cell as? EditionMenuCollectionCell, let option = editionOptions.object(at: indexPath.item) {
             cell.bindTo(option, enabled: option == .gif ? shouldExportMediaAsGIF : false)
+            if option == .gif || option == .filter  {
+                cell.isHidden = true
+            }
+                        
             cell.delegate = self
         }
         return cell

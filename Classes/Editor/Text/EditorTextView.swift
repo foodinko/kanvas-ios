@@ -361,7 +361,7 @@ final class EditorTextView: UIView, MainTextViewDelegate {
         
         NSLayoutConstraint.activate([
             fontSelector.topAnchor.constraint(equalTo: mainMenuContainer.topAnchor),
-            fontSelector.leadingAnchor.constraint(equalTo: mainMenuContainer.leadingAnchor, constant: Constants.leftMargin),
+            fontSelector.leadingAnchor.constraint(equalTo: fontSelector.trailingAnchor, constant: Constants.leftMargin),
             fontSelector.heightAnchor.constraint(equalToConstant: Constants.customIconSize),
             fontSelector.widthAnchor.constraint(equalToConstant: Constants.customIconSize)
         ])

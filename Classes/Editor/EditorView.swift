@@ -85,7 +85,7 @@ private struct EditorViewConstants {
     static let animationDuration: TimeInterval = 0.25
     static let editionOptionAnimationDuration: TimeInterval = 0.5
     static let editionOptionAnimationBouncingFactor: CGFloat = 1.1
-    static let confirmButtonSize: CGFloat = 49
+    static let confirmButtonSize: CGFloat = 60
     static let confirmButtonHorizontalMargin: CGFloat = 20
     static let postButtonSize: CGFloat = 54
     static let postButtonHorizontalMargin: CGFloat = 18
@@ -467,8 +467,12 @@ final class EditorView: UIView, MovableViewCanvasDelegate, MediaPlayerViewDelega
     
     private func setupConfirmButton() {
         confirmButton.accessibilityLabel = "Confirm Button"
-        navigationContainer.addSubview(confirmButton)
-        confirmButton.setImage(KanvasImages.shared.nextImage, for: .normal)
+        addSubview(confirmButton)
+        confirmButton.backgroundColor = UIColor(red: 105/255, green: 55/255, blue: 255/255, alpha: 1.0)
+//        confirmButton.backgroundColor = .clear
+        confirmButton.layer.cornerRadius = 18
+        confirmButton.setTitleColor(.white, for: .normal)
+        confirmButton.setTitle("등록", for: .normal)
         confirmButton.addTarget(self, action: #selector(confirmButtonPressed), for: .touchUpInside)
         confirmButton.translatesAutoresizingMaskIntoConstraints = false
 
@@ -481,13 +485,13 @@ final class EditorView: UIView, MovableViewCanvasDelegate, MediaPlayerViewDelega
         } else {
             positioningConstraints = [
                 confirmButton.trailingAnchor.constraint(equalTo: safeLayoutGuide.trailingAnchor, constant: -EditorViewConstants.confirmButtonHorizontalMargin),
+                confirmButton.leadingAnchor.constraint(equalTo: safeLayoutGuide.leadingAnchor, constant: EditorViewConstants.confirmButtonHorizontalMargin),
                 confirmButton.bottomAnchor.constraint(equalTo: safeLayoutGuide.bottomAnchor, constant: -EditorViewConstants.buttonBottomMargin)
             ]
         }
 
         NSLayoutConstraint.activate([
-            confirmButton.heightAnchor.constraint(equalToConstant: EditorViewConstants.confirmButtonSize),
-            confirmButton.widthAnchor.constraint(equalToConstant: EditorViewConstants.confirmButtonSize),
+            confirmButton.heightAnchor.constraint(equalToConstant: EditorViewConstants.confirmButtonSize)
         ] + positioningConstraints)
     }
 
@@ -524,7 +528,6 @@ final class EditorView: UIView, MovableViewCanvasDelegate, MediaPlayerViewDelega
     
     private func setupCollection() {
         navigationContainer.addSubview(collectionContainer)
-        collectionContainer.backgroundColor = .clear
         collectionContainer.accessibilityIdentifier = "Edition Menu Collection Container"
         collectionContainer.clipsToBounds = false
         collectionContainer.translatesAutoresizingMaskIntoConstraints = false
@@ -538,50 +541,12 @@ final class EditorView: UIView, MovableViewCanvasDelegate, MediaPlayerViewDelega
             ])
         }
         else {
-
-            let leftButton: UIView?
-            let leadingMargin: CGFloat
-            let xAnchor: NSLayoutXAxisAnchor
-            let trailingMargin: CGFloat
-
-            if showMuteButton {
-                leftButton = muteButton
-                leadingMargin = EditorViewConstants.saveButtonHorizontalMargin
-            } else {
-                leftButton = nil
-                leadingMargin = 0
-            }
-
-            if confirmAtTop {
-                xAnchor = safeAreaLayoutGuide.trailingAnchor
-                trailingMargin = 0
-            } else {
-                if showSaveButton {
-                    xAnchor = saveButton.leadingAnchor
-                    trailingMargin = EditorViewConstants.saveButtonHorizontalMargin
-                }
-                else {
-                    xAnchor = confirmOrPostButton().leadingAnchor
-                    trailingMargin = confirmOrPostButtonHorizontalMargin()
-                }
-            }
-
-            let verticalPositioning: [NSLayoutConstraint]
-            if confirmAtTop {
-                verticalPositioning = [collectionContainer.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -KanvasEditorDesign.shared.editorViewButtonBottomMargin)]
-            } else {
-                verticalPositioning = [collectionContainer.centerYAnchor.constraint(equalTo: confirmOrPostButton().centerYAnchor)]
-            }
-
-            let leftButtonConstraints = [
-                leftButton?.centerYAnchor.constraint(equalTo: collectionContainer.centerYAnchor)
-            ].compactMap { $0 }
-
             NSLayoutConstraint.activate([
-                collectionContainer.leadingAnchor.constraint(equalTo: leftButton?.trailingAnchor ?? safeAreaLayoutGuide.leadingAnchor, constant: leadingMargin),
-                collectionContainer.trailingAnchor.constraint(equalTo: xAnchor, constant: -trailingMargin / 2),
-                collectionContainer.heightAnchor.constraint(equalToConstant: EditionMenuCollectionView.height),
-            ] + verticalPositioning + leftButtonConstraints)
+                collectionContainer.leadingAnchor.constraint(equalTo: closeButton.trailingAnchor, constant: EditorViewConstants.closeButtonHorizontalMargin),
+                collectionContainer.topAnchor.constraint(equalTo: safeLayoutGuide.topAnchor, constant: 10),
+                collectionContainer.trailingAnchor.constraint(equalTo: safeLayoutGuide.trailingAnchor, constant: -20.0),
+                collectionContainer.bottomAnchor.constraint(equalTo: movableViewCanvas.topAnchor, constant: -10)                
+            ])
         }
     }
     
@@ -608,10 +573,10 @@ final class EditorView: UIView, MovableViewCanvasDelegate, MediaPlayerViewDelega
         
         addSubview(textMenuContainer)
         NSLayoutConstraint.activate([
-            textMenuContainer.leadingAnchor.constraint(equalTo: playerView?.leadingAnchor ?? leadingAnchor),
-            textMenuContainer.trailingAnchor.constraint(equalTo: playerView?.trailingAnchor ?? trailingAnchor),
-            textMenuContainer.topAnchor.constraint(equalTo: playerView?.topAnchor ?? topAnchor),
-            textMenuContainer.bottomAnchor.constraint(equalTo: playerView?.bottomAnchor ?? bottomAnchor)
+            textMenuContainer.trailingAnchor.constraint(equalTo: safeLayoutGuide.trailingAnchor, constant: -20.0),
+            textMenuContainer.topAnchor.constraint(equalTo: safeLayoutGuide.topAnchor, constant: 20.0),
+            textMenuContainer.heightAnchor.constraint(equalTo: closeButton.widthAnchor),
+            textMenuContainer.widthAnchor.constraint(equalToConstant: EditorViewConstants.closeButtonSize)
         ])
     }
     
