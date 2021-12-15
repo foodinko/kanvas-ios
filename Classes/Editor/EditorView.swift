@@ -122,7 +122,7 @@ final class EditorView: UIView, MovableViewCanvasDelegate, MediaPlayerViewDelega
     func didRenderRectChange(rect: CGRect) {
         if playerView?.contentMode != .scaleToFill {
             // When scaling to fill we don't need to update these views as they are already sized correctly.
-            drawingCanvasConstraints.update(with: rect)
+//            drawingCanvasConstraints.update(with: rect)
             movableViewCanvasConstraints.update(with: rect)
         }
         delegate?.didRenderRectChange(rect: rect)
@@ -173,6 +173,7 @@ final class EditorView: UIView, MovableViewCanvasDelegate, MediaPlayerViewDelega
     private let overlay = UIView()
     private let overlayLabel = UILabel()
     private var overlayLabelConstraint: NSLayoutConstraint?
+    private let confirmButtonFont: UIFont
     let collectionContainer = IgnoreTouchesView()
     let filterMenuContainer = IgnoreTouchesView()
     let textMenuContainer = IgnoreTouchesView()
@@ -192,15 +193,16 @@ final class EditorView: UIView, MovableViewCanvasDelegate, MediaPlayerViewDelega
 
     let drawingCanvas = IgnoreTouchesView()
 
-    private lazy var drawingCanvasConstraints: FullViewConstraints = {
-        return FullViewConstraints(
-            view: drawingCanvas,
-            top: drawingCanvas.topAnchor.constraint(equalTo: playerView?.topAnchor ?? topAnchor),
-            bottom: drawingCanvas.bottomAnchor.constraint(equalTo: playerView?.bottomAnchor ?? bottomAnchor),
-            leading: drawingCanvas.leadingAnchor.constraint(equalTo: playerView?.leadingAnchor ?? leadingAnchor),
-            trailing: drawingCanvas.trailingAnchor.constraint(equalTo: playerView?.trailingAnchor ?? trailingAnchor)
-        )
-    }()
+    // custom 했음.
+//    private lazy var drawingCanvasConstraints: FullViewConstraints = {
+//        return FullViewConstraints(
+//            view: drawingCanvas,
+//            top: drawingCanvas.topAnchor.constraint(equalTo: playerView?.topAnchor ?? topAnchor),
+//            bottom: drawingCanvas.bottomAnchor.constraint(equalTo: confirmButton.topAnchor, constant: 20),
+//            leading: drawingCanvas.leadingAnchor.constraint(equalTo: playerView?.leadingAnchor ?? leadingAnchor),
+//            trailing: drawingCanvas.trailingAnchor.constraint(equalTo: playerView?.trailingAnchor ?? trailingAnchor)
+//        )
+//    }()
 
     var movableViewCanvas: MovableViewCanvas
 
@@ -259,6 +261,7 @@ final class EditorView: UIView, MovableViewCanvasDelegate, MediaPlayerViewDelega
          quickBlogSelectorCoordinator: KanvasQuickBlogSelectorCoordinating?,
          tagCollection: UIView?,
          metalContext: MetalContext?,
+         confirmButtonFont: UIFont?,
          mediaContentMode: UIView.ContentMode,
          movableViewCanvas: MovableViewCanvas?) {
         self.delegate = delegate
@@ -277,6 +280,7 @@ final class EditorView: UIView, MovableViewCanvasDelegate, MediaPlayerViewDelega
         self.tagCollection = tagCollection
         self.metalContext = metalContext
         self.mediaContentMode = mediaContentMode
+        self.confirmButtonFont = confirmButtonFont ?? UIFont.boldSystemFont(ofSize: 18.0)
         self.movableViewCanvas = movableViewCanvas ?? MovableViewCanvas()
         super.init(frame: .zero)
         self.movableViewCanvas.delegate = self
@@ -297,7 +301,6 @@ final class EditorView: UIView, MovableViewCanvasDelegate, MediaPlayerViewDelega
     
     private func setupViews() {
         setupPlayer()
-        setupDrawingCanvas()
         setupMovableViewCanvas()
         setupNavigationContainer()
         setupCloseButton()
@@ -321,6 +324,8 @@ final class EditorView: UIView, MovableViewCanvasDelegate, MediaPlayerViewDelega
         if showMuteButton {
             setupMuteButton()
         }
+        
+        setupDrawingCanvas()
         setupCollection()
         setupFilterMenu()
         setupTextMenu()
@@ -379,10 +384,17 @@ final class EditorView: UIView, MovableViewCanvasDelegate, MediaPlayerViewDelega
         self.playerView = playerView
     }
 
+    // MARK: foodinko 2.0 을 위해 커스텀 진행했으나 수정이 필요해 보임.
     private func setupDrawingCanvas() {
         drawingCanvas.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(drawingCanvas)
-        drawingCanvasConstraints.activate()
+        NSLayoutConstraint.activate([
+            drawingCanvas.topAnchor.constraint(equalTo: playerView?.topAnchor ?? topAnchor),
+            drawingCanvas.bottomAnchor.constraint(greaterThanOrEqualTo: confirmButton.topAnchor, constant: -20),
+            drawingCanvas.leadingAnchor.constraint(equalTo: playerView?.leadingAnchor ?? leadingAnchor),
+            drawingCanvas.trailingAnchor.constraint(equalTo: playerView?.trailingAnchor ?? trailingAnchor)
+        ])
+//        drawingCanvasConstraints.activate()
     }
 
     private func setupMovableViewCanvas() {
@@ -395,6 +407,7 @@ final class EditorView: UIView, MovableViewCanvasDelegate, MediaPlayerViewDelega
     /// Container that holds the back button and the bottom menu
     private func setupNavigationContainer() {
         navigationContainer.accessibilityIdentifier = "Navigation Container"
+        navigationContainer.backgroundColor = .clear
         navigationContainer.translatesAutoresizingMaskIntoConstraints = false
         
         addSubview(navigationContainer)
@@ -469,10 +482,10 @@ final class EditorView: UIView, MovableViewCanvasDelegate, MediaPlayerViewDelega
         confirmButton.accessibilityLabel = "Confirm Button"
         addSubview(confirmButton)
         confirmButton.backgroundColor = UIColor(red: 105/255, green: 55/255, blue: 255/255, alpha: 1.0)
-//        confirmButton.backgroundColor = .clear
         confirmButton.layer.cornerRadius = 18
         confirmButton.setTitleColor(.white, for: .normal)
         confirmButton.setTitle("등록", for: .normal)
+        confirmButton.titleLabel?.font = self.confirmButtonFont
         confirmButton.addTarget(self, action: #selector(confirmButtonPressed), for: .touchUpInside)
         confirmButton.translatesAutoresizingMaskIntoConstraints = false
 
@@ -545,7 +558,7 @@ final class EditorView: UIView, MovableViewCanvasDelegate, MediaPlayerViewDelega
                 collectionContainer.leadingAnchor.constraint(equalTo: closeButton.trailingAnchor, constant: EditorViewConstants.closeButtonHorizontalMargin),
                 collectionContainer.topAnchor.constraint(equalTo: safeLayoutGuide.topAnchor, constant: 10),
                 collectionContainer.trailingAnchor.constraint(equalTo: safeLayoutGuide.trailingAnchor, constant: -20.0),
-                collectionContainer.bottomAnchor.constraint(equalTo: movableViewCanvas.topAnchor, constant: -10)                
+                collectionContainer.bottomAnchor.constraint(equalTo: movableViewCanvas.topAnchor, constant: -10)
             ])
         }
     }
@@ -569,14 +582,14 @@ final class EditorView: UIView, MovableViewCanvasDelegate, MediaPlayerViewDelega
         textMenuContainer.backgroundColor = .clear
         textMenuContainer.accessibilityIdentifier = "Text Menu Container"
         textMenuContainer.translatesAutoresizingMaskIntoConstraints = false
-        textMenuContainer.clipsToBounds = false
+        textMenuContainer.clipsToBounds = false        
         
         addSubview(textMenuContainer)
         NSLayoutConstraint.activate([
-            textMenuContainer.trailingAnchor.constraint(equalTo: safeLayoutGuide.trailingAnchor, constant: -20.0),
-            textMenuContainer.topAnchor.constraint(equalTo: safeLayoutGuide.topAnchor, constant: 20.0),
-            textMenuContainer.heightAnchor.constraint(equalTo: closeButton.widthAnchor),
-            textMenuContainer.widthAnchor.constraint(equalToConstant: EditorViewConstants.closeButtonSize)
+            textMenuContainer.leadingAnchor.constraint(equalTo: playerView?.leadingAnchor ?? leadingAnchor),
+            textMenuContainer.trailingAnchor.constraint(equalTo: playerView?.trailingAnchor ?? trailingAnchor),
+            textMenuContainer.topAnchor.constraint(equalTo: playerView?.topAnchor ?? topAnchor),
+            textMenuContainer.bottomAnchor.constraint(equalTo: playerView?.bottomAnchor ?? bottomAnchor)
         ])
     }
     

@@ -250,6 +250,7 @@ public final class EditorViewController: UIViewController, MediaPlayerController
                                     quickBlogSelectorCoordinator: quickBlogSelectorCoordinator,
                                     tagCollection: tagCollection,
                                     metalContext: metalContext,
+                                    confirmButtonFont: settings.confirmButtonFont,
                                     mediaContentMode: settings.features.scaleMediaToFill ? .scaleAspectFill : .scaleAspectFit,
                                     movableViewCanvas: canvas)
         canvas.delegate = editorView

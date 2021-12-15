@@ -153,13 +153,12 @@ final class EditorTextController: UIViewController, EditorTextViewDelegate, Colo
     }
     
     private func setUpView() {
-        textView.alpha = 1
+        textView.alpha = 0
     }
     
     private func prepareForText(_ options: TextOptions, _ transformations: ViewTransformations) {
         textTransformations = transformations
         textView.options = options
-        
         fonts.rotate(to: options.font)
         alignments.rotate(to: options.alignment)
         highlight = options.highlightColor?.isVisible()

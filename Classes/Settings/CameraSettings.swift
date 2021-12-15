@@ -6,6 +6,7 @@
 
 import AVFoundation
 import Foundation
+import UIKit
 
 /// Camera Modes available
 ///
@@ -314,6 +315,9 @@ public struct CameraFeatures {
 
     /// The aspect ratio to pin the Editor View to
     public var aspectRatio: CGFloat? = nil
+        
+    /// 사진 편집 화면에서 Confirm Button의 Label Font에 사용.
+    public var confirmButtonFont: UIFont = UIFont.boldSystemFont(ofSize: 18)
 
     override public init() { }
 
