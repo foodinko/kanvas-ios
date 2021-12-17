@@ -122,7 +122,7 @@ final class EditorView: UIView, MovableViewCanvasDelegate, MediaPlayerViewDelega
     func didRenderRectChange(rect: CGRect) {
         if playerView?.contentMode != .scaleToFill {
             // When scaling to fill we don't need to update these views as they are already sized correctly.
-//            drawingCanvasConstraints.update(with: rect)
+            drawingCanvasConstraints.update(with: rect)
             movableViewCanvasConstraints.update(with: rect)
         }
         delegate?.didRenderRectChange(rect: rect)
@@ -194,15 +194,19 @@ final class EditorView: UIView, MovableViewCanvasDelegate, MediaPlayerViewDelega
     let drawingCanvas = IgnoreTouchesView()
 
     // custom 했음.
-//    private lazy var drawingCanvasConstraints: FullViewConstraints = {
-//        return FullViewConstraints(
-//            view: drawingCanvas,
+    private lazy var drawingCanvasConstraints: FullViewConstraints = {
+        return FullViewConstraints(
+            view: drawingCanvas,
+            top: drawingCanvas.topAnchor.constraint(equalTo: topAnchor, constant: 30),
+            bottom: drawingCanvas.bottomAnchor.constraint(equalTo: confirmButton.topAnchor, constant: -30),
+            leading: drawingCanvas.leadingAnchor.constraint(equalTo: playerView?.leadingAnchor ?? leadingAnchor),
+            trailing: drawingCanvas.trailingAnchor.constraint(equalTo: playerView?.trailingAnchor ?? trailingAnchor)
 //            top: drawingCanvas.topAnchor.constraint(equalTo: playerView?.topAnchor ?? topAnchor),
 //            bottom: drawingCanvas.bottomAnchor.constraint(equalTo: confirmButton.topAnchor, constant: 20),
 //            leading: drawingCanvas.leadingAnchor.constraint(equalTo: playerView?.leadingAnchor ?? leadingAnchor),
 //            trailing: drawingCanvas.trailingAnchor.constraint(equalTo: playerView?.trailingAnchor ?? trailingAnchor)
-//        )
-//    }()
+        )
+    }()
 
     var movableViewCanvas: MovableViewCanvas
 
@@ -217,8 +221,8 @@ final class EditorView: UIView, MovableViewCanvasDelegate, MediaPlayerViewDelega
     }()
     
     public func updateCustomConstraints(rectFrame: CGRect) {
-        drawingCanvas.widthAnchor.constraint(equalToConstant: rectFrame.width).isActive = true
-        drawingCanvas.heightAnchor.constraint(equalToConstant: rectFrame.height).isActive = true
+//        drawingCanvas.widthAnchor.constraint(equalToConstant: rectFrame.width).isActive = true
+//        drawingCanvas.heightAnchor.constraint(equalToConstant: rectFrame.height).isActive = true
         movableViewCanvas.widthAnchor.constraint(equalToConstant: rectFrame.width).isActive = true
         movableViewCanvas.heightAnchor.constraint(equalToConstant: rectFrame.height).isActive = true
     }
@@ -387,14 +391,14 @@ final class EditorView: UIView, MovableViewCanvasDelegate, MediaPlayerViewDelega
     // MARK: foodinko 2.0 을 위해 커스텀 진행했으나 수정이 필요해 보임.
     private func setupDrawingCanvas() {
         drawingCanvas.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(drawingCanvas)
-        NSLayoutConstraint.activate([
-            drawingCanvas.topAnchor.constraint(equalTo: playerView?.topAnchor ?? topAnchor),
-            drawingCanvas.bottomAnchor.constraint(greaterThanOrEqualTo: confirmButton.topAnchor, constant: -20),
-            drawingCanvas.leadingAnchor.constraint(equalTo: playerView?.leadingAnchor ?? leadingAnchor),
-            drawingCanvas.trailingAnchor.constraint(equalTo: playerView?.trailingAnchor ?? trailingAnchor)
-        ])
-//        drawingCanvasConstraints.activate()
+        addSubview(drawingCanvas)
+//        NSLayoutConstraint.activate([
+//            drawingCanvas.topAnchor.constraint(equalTo: topAnchor),
+//            drawingCanvas.bottomAnchor.constraint(equalTo: confirmButton.topAnchor, constant: -30),
+//            drawingCanvas.leadingAnchor.constraint(equalTo: playerView?.leadingAnchor ?? leadingAnchor),
+//            drawingCanvas.trailingAnchor.constraint(equalTo: playerView?.trailingAnchor ?? trailingAnchor)
+//        ])
+        drawingCanvasConstraints.activate()
     }
 
     private func setupMovableViewCanvas() {
@@ -558,7 +562,7 @@ final class EditorView: UIView, MovableViewCanvasDelegate, MediaPlayerViewDelega
                 collectionContainer.leadingAnchor.constraint(equalTo: closeButton.trailingAnchor, constant: EditorViewConstants.closeButtonHorizontalMargin),
                 collectionContainer.topAnchor.constraint(equalTo: safeLayoutGuide.topAnchor, constant: 10),
                 collectionContainer.trailingAnchor.constraint(equalTo: safeLayoutGuide.trailingAnchor, constant: -20.0),
-                collectionContainer.bottomAnchor.constraint(equalTo: movableViewCanvas.topAnchor, constant: -10)
+                collectionContainer.bottomAnchor.constraint(equalTo: movableViewCanvas.topAnchor, constant: -20)
             ])
         }
     }

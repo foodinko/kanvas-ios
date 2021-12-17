@@ -413,8 +413,8 @@ public final class EditorViewController: UIViewController, MediaPlayerController
         view.backgroundColor = .black
         player.playerView?.isHidden = true
         
-        let standard = settings.aspectRatio == 1 ? view.frame.width - 40 : (view.frame.width - 40) * 1.77
-        let rectFrame = CGRect(x: 0, y: 0, width: view.frame.width - 40, height: standard)
+        let standard = settings.aspectRatio == 1 ? view.frame.width - 90 : (view.frame.width - 90) * 1.77
+        let rectFrame = CGRect(x: 0, y: 0, width: view.frame.width - 60, height: standard)
 
         rectView = UIView(frame: rectFrame)
         rectView.backgroundColor = .clear

@@ -357,6 +357,7 @@ final class EditorTextView: UIView, MainTextViewDelegate {
         fontSelector.layer.cornerRadius = Constants.customIconSize / 2
         fontSelector.backgroundColor = KanvasEditorDesign.shared.buttonBackgroundColor
         fontSelector.translatesAutoresizingMaskIntoConstraints = false
+        fontSelector.isHidden = true
         mainMenuContainer.addSubview(fontSelector)
         
         NSLayoutConstraint.activate([

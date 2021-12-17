@@ -82,7 +82,7 @@ final class EditionMenuCollectionCell: UICollectionViewCell, KanvasEditorMenuCol
         
         NSLayoutConstraint.activate([
             iconView.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor),
-            iconView.centerYAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerYAnchor),
+            iconView.centerYAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerYAnchor, constant: -10),
             iconView.heightAnchor.constraint(equalToConstant: Constants.circleDiameter),
             iconView.widthAnchor.constraint(equalToConstant: Constants.circleDiameter)
         ])

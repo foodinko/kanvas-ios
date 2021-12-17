@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "fontBlock@1x.png",
+      "filename" : "btnTextWrite.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "fontBlock@2x.png",
+      "filename" : "btnTextWrite@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "fontBlock@3x.png",
+      "filename" : "btnTextWrite@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
