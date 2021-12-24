@@ -413,7 +413,7 @@ public final class EditorViewController: UIViewController, MediaPlayerController
         view.backgroundColor = .black
         player.playerView?.isHidden = true
         
-        let standard = settings.aspectRatio == 1 ? view.frame.width - 90 : (view.frame.width - 90) * 1.77
+        let standard = settings.aspectRatio == 1 ? view.frame.width - 90 : (view.frame.width - 60) * 1.77 + 10
         let rectFrame = CGRect(x: 0, y: 0, width: view.frame.width - 60, height: standard)
 
         rectView = UIView(frame: rectFrame)
@@ -424,7 +424,9 @@ public final class EditorViewController: UIViewController, MediaPlayerController
         rectView.translatesAutoresizingMaskIntoConstraints = false
         rectView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         rectView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        rectView.heightAnchor.constraint(equalToConstant: rectFrame.height).isActive = true
+//        rectView.heightAnchor.constraint(equalToConstant: rectFrame.height).isActive = true
+        rectView.topAnchor.constraint(equalTo: view.safeLayoutGuide.topAnchor, constant: 70).isActive = true
+        rectView.bottomAnchor.constraint(equalTo: view.safeLayoutGuide.bottomAnchor, constant: -80).isActive = true
         rectView.widthAnchor.constraint(equalToConstant: rectFrame.width).isActive = true
         rectView.layer.borderWidth = 2
         rectView.layer.borderColor = UIColor.gray.cgColor

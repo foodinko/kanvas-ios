@@ -213,7 +213,7 @@ final class EditorView: UIView, MovableViewCanvasDelegate, MediaPlayerViewDelega
     private lazy var movableViewCanvasConstraints = {
         return FullViewConstraints(
             view: movableViewCanvas,
-            top: movableViewCanvas.topAnchor.constraint(equalTo: playerView?.topAnchor ?? topAnchor),
+            top: movableViewCanvas.topAnchor.constraint(equalTo: playerView?.topAnchor ?? topAnchor, constant: -20.0),
             bottom: movableViewCanvas.bottomAnchor.constraint(equalTo: playerView?.bottomAnchor ?? bottomAnchor),
             leading: movableViewCanvas.leadingAnchor.constraint(equalTo: playerView?.leadingAnchor ?? leadingAnchor),
             trailing: movableViewCanvas.trailingAnchor.constraint(equalTo: playerView?.trailingAnchor ?? trailingAnchor)
@@ -224,7 +224,7 @@ final class EditorView: UIView, MovableViewCanvasDelegate, MediaPlayerViewDelega
 //        drawingCanvas.widthAnchor.constraint(equalToConstant: rectFrame.width).isActive = true
 //        drawingCanvas.heightAnchor.constraint(equalToConstant: rectFrame.height).isActive = true
         movableViewCanvas.widthAnchor.constraint(equalToConstant: rectFrame.width).isActive = true
-        movableViewCanvas.heightAnchor.constraint(equalToConstant: rectFrame.height).isActive = true
+        movableViewCanvas.heightAnchor.constraint(equalToConstant: rectFrame.height + 20).isActive = true
     }
 
     var avatarView: UIView? {
@@ -476,7 +476,7 @@ final class EditorView: UIView, MovableViewCanvasDelegate, MediaPlayerViewDelega
         closeButton.setImage(image, for: .normal)
         NSLayoutConstraint.activate([
             closeButton.leadingAnchor.constraint(equalTo: safeLayoutGuide.leadingAnchor, constant: EditorViewConstants.closeButtonHorizontalMargin),
-            closeButton.topAnchor.constraint(equalTo: safeLayoutGuide.topAnchor, constant: EditorViewConstants.buttonTopMargin),
+            closeButton.topAnchor.constraint(equalTo: safeLayoutGuide.topAnchor, constant: 16),
             closeButton.heightAnchor.constraint(equalTo: closeButton.widthAnchor),
             closeButton.widthAnchor.constraint(equalToConstant: EditorViewConstants.closeButtonSize)
         ])
@@ -503,7 +503,8 @@ final class EditorView: UIView, MovableViewCanvasDelegate, MediaPlayerViewDelega
             positioningConstraints = [
                 confirmButton.trailingAnchor.constraint(equalTo: safeLayoutGuide.trailingAnchor, constant: -EditorViewConstants.confirmButtonHorizontalMargin),
                 confirmButton.leadingAnchor.constraint(equalTo: safeLayoutGuide.leadingAnchor, constant: EditorViewConstants.confirmButtonHorizontalMargin),
-                confirmButton.bottomAnchor.constraint(equalTo: safeLayoutGuide.bottomAnchor, constant: -EditorViewConstants.buttonBottomMargin)
+                confirmButton.topAnchor.constraint(equalTo: movableViewCanvas.bottomAnchor, constant: -10),
+                confirmButton.bottomAnchor.constraint(equalTo: safeLayoutGuide.bottomAnchor, constant: 0)
             ]
         }
 
@@ -560,9 +561,9 @@ final class EditorView: UIView, MovableViewCanvasDelegate, MediaPlayerViewDelega
         else {
             NSLayoutConstraint.activate([
                 collectionContainer.leadingAnchor.constraint(equalTo: closeButton.trailingAnchor, constant: EditorViewConstants.closeButtonHorizontalMargin),
-                collectionContainer.topAnchor.constraint(equalTo: safeLayoutGuide.topAnchor, constant: 10),
-                collectionContainer.trailingAnchor.constraint(equalTo: safeLayoutGuide.trailingAnchor, constant: -20.0),
-                collectionContainer.bottomAnchor.constraint(equalTo: movableViewCanvas.topAnchor, constant: -20)
+                collectionContainer.topAnchor.constraint(equalTo: safeLayoutGuide.topAnchor, constant: 0),
+                collectionContainer.trailingAnchor.constraint(equalTo: safeLayoutGuide.trailingAnchor, constant: -20),
+                collectionContainer.bottomAnchor.constraint(equalTo: movableViewCanvas.topAnchor, constant: 0),
             ])
         }
     }
