@@ -41,8 +41,8 @@ final class EditionMenuCollectionController: UIViewController, KanvasEditorMenuC
         }
         
         // 정렬를 위해 다 넣고 cellForItemAt 에서 hidden 처리
-        editionOptions.append(.gif)
-        editionOptions.append(.filter)
+//        editionOptions.append(.gif)
+//        editionOptions.append(.filter)
         editionOptions.append(.text)
         editionOptions.append(.media)
         
@@ -115,10 +115,7 @@ final class EditionMenuCollectionController: UIViewController, KanvasEditorMenuC
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditionMenuCollectionCell.identifier, for: indexPath)
         if let cell = cell as? EditionMenuCollectionCell, let option = editionOptions.object(at: indexPath.item) {
             cell.bindTo(option, enabled: option == .gif ? shouldExportMediaAsGIF : false)
-            if option == .gif || option == .filter  {
-                cell.isHidden = true
-            }
-                        
+            
             cell.delegate = self
         }
         return cell
@@ -127,6 +124,7 @@ final class EditionMenuCollectionController: UIViewController, KanvasEditorMenuC
     // MARK: - UICollectionViewDelegateFlowLayout
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        collectionView.semanticContentAttribute = UISemanticContentAttribute.forceRightToLeft
         guard editionOptions.count > 0, collectionView.bounds != .zero else { return .zero }
         return UIEdgeInsets(top: 0, left: Constants.collectionLeftInset, bottom: 0, right: Constants.collectionRightInset)
     }
