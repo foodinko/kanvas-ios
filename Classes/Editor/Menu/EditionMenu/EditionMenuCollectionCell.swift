@@ -19,7 +19,7 @@ protocol EditionMenuCollectionCellDelegate: class {
 
 private struct Constants {
     static let circleDiameter: CGFloat = 50
-    static let padding: CGFloat = 8
+    static let padding: CGFloat = 0
     
     static let animationDuration: TimeInterval = 0.25
     
@@ -28,7 +28,7 @@ private struct Constants {
     }
     
     static var width: CGFloat {
-        return circleDiameter + 2 * padding
+        return circleDiameter
     }
 }
 
@@ -82,7 +82,7 @@ final class EditionMenuCollectionCell: UICollectionViewCell, KanvasEditorMenuCol
         
         NSLayoutConstraint.activate([
             iconView.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor),
-            iconView.centerYAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerYAnchor, constant: -10),
+            iconView.centerYAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerYAnchor, constant: 0),
             iconView.heightAnchor.constraint(equalToConstant: Constants.circleDiameter),
             iconView.widthAnchor.constraint(equalToConstant: Constants.circleDiameter)
         ])
