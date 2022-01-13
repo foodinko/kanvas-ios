@@ -224,7 +224,7 @@ final class EditorView: UIView, MovableViewCanvasDelegate, MediaPlayerViewDelega
 //        drawingCanvas.widthAnchor.constraint(equalToConstant: rectFrame.width).isActive = true
 //        drawingCanvas.heightAnchor.constraint(equalToConstant: rectFrame.height).isActive = true
         movableViewCanvas.widthAnchor.constraint(equalToConstant: rectFrame.width).isActive = true
-        movableViewCanvas.heightAnchor.constraint(equalToConstant: rectFrame.height + 20).isActive = true
+        movableViewCanvas.heightAnchor.constraint(equalToConstant: rectFrame.height).isActive = true
     }
 
     var avatarView: UIView? {

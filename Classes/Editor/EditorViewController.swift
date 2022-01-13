@@ -426,7 +426,7 @@ public final class EditorViewController: UIViewController, MediaPlayerController
         rectView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
 //        rectView.heightAnchor.constraint(equalToConstant: rectFrame.height).isActive = true
         rectView.topAnchor.constraint(equalTo: view.safeLayoutGuide.topAnchor, constant: 70).isActive = true
-        rectView.bottomAnchor.constraint(equalTo: view.safeLayoutGuide.bottomAnchor, constant: -80).isActive = true
+        rectView.bottomAnchor.constraint(equalTo: view.safeLayoutGuide.bottomAnchor, constant: -90).isActive = true
         rectView.widthAnchor.constraint(equalToConstant: rectFrame.width).isActive = true
         rectView.layer.borderWidth = 2
         rectView.layer.borderColor = UIColor.gray.cgColor
