@@ -492,6 +492,7 @@ final class EditorView: UIView, MovableViewCanvasDelegate, MediaPlayerViewDelega
         confirmButton.titleLabel?.font = self.confirmButtonFont
         confirmButton.addTarget(self, action: #selector(confirmButtonPressed), for: .touchUpInside)
         confirmButton.translatesAutoresizingMaskIntoConstraints = false
+        confirmButton.isUserInteractionEnabled = true
 
         let positioningConstraints: [NSLayoutConstraint]
         if confirmAtTop {
@@ -831,6 +832,7 @@ final class EditorView: UIView, MovableViewCanvasDelegate, MediaPlayerViewDelega
     
     // MARK: - buttons
     @objc private func closeButtonPressed() {
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
         delegate?.didTapCloseButton()
     }
 
@@ -839,6 +841,9 @@ final class EditorView: UIView, MovableViewCanvasDelegate, MediaPlayerViewDelega
     }
     
     @objc private func confirmButtonPressed() {
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+        print("??? confirmButtonPressed")
+        self.confirmButton.isUserInteractionEnabled = false
         delegate?.didTapConfirmButton()
     }
 
