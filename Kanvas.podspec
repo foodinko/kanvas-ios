@@ -13,7 +13,7 @@ Pod::Spec.new do |spec|
   spec.requires_arc = true
   spec.frameworks = "Foundation", "GLKit", "OpenGLES", "UIKit"
   spec.source_files  = "Classes/**/*.{h,m,swift,vsh,glsl}"
-  spec.resource_bundles = ['Kanvas/Assets/*.{xcassets}']
+  spec.resource_bundles = ['Resources/*.{xcassets}']
   spec.user_target_xcconfig = { "GCC_PREPROCESSOR_DEFINITIONS" => "GLES_SILENCE_DEPRECATION=1" }
   spec.pod_target_xcconfig = { "GCC_PREPROCESSOR_DEFINITIONS" => "GLES_SILENCE_DEPRECATION=1" }
 end
