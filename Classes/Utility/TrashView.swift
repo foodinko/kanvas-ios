@@ -142,7 +142,7 @@ final class TrashView: IgnoreTouchesView {
         openedTrash.translatesAutoresizingMaskIntoConstraints = false
         openedTrash.contentMode = .scaleAspectFit
         openedTrash.clipsToBounds = true
-        openedTrash.image = KanvasDesign.shared.trashViewOpenedImage
+        openedTrash.image = CameraSettings().editorTrashOpendIcon
         
         let yOffset = KanvasDesign.shared.trashViewOpenedIconCenterYOffset
         let xOffset = KanvasDesign.shared.trashViewOpenedIconCenterXOffset
