@@ -48,10 +48,10 @@ public struct KanvasImages {
     static let backArrowImage = UIImage.imageFromCameraBundle(named: "backArrow")
     static let chevron = UIImage.imageFromCameraBundle(named: "chevron")
     static let forwardImage = UIImage.imageFromCameraBundle(named: "forwardArrow")
-    static let trashClosed = UIImage.imageFromCameraBundle(named: "trashClosed")
-    static let trashOpened = UIImage.imageFromCameraBundle(named: "trashOpened")
-    static let trashBinClosed = UIImage.imageFromCameraBundle(named: "trashBinClosed")
-    static let trashBinOpened = UIImage.imageFromCameraBundle(named: "trashBinOpened")
+    static let trashClosed = CameraSettings().editorTrashClosedIcon ?? UIImage.imageFromCameraBundle(named: "trashClosed")
+    static let trashOpened = CameraSettings().editorTrashOpendIcon ?? UIImage.imageFromCameraBundle(named: "trashOpened")
+    static let trashBinClosed = CameraSettings().editorTrashClosedIcon ?? UIImage.imageFromCameraBundle(named: "trashBinClosed")
+    static let trashBinOpened = CameraSettings().editorTrashOpendIcon ?? UIImage.imageFromCameraBundle(named: "trashBinOpened")
     static let circleImage = UIImage.imageFromCameraBundle(named: "circleIcon")
     static let nextArrowImage = UIImage.imageFromCameraBundle(named: "nextArrow")
     static let saveImage = UIImage.imageFromCameraBundle(named: "save")
@@ -87,8 +87,8 @@ public struct KanvasImages {
             UIImage.imageFromCameraBundle(named: "editorGifOn"),
         ],
         .filter: [UIImage.imageFromCameraBundle(named: "editorFilters")],
-        .text: [UIImage.imageFromCameraBundle(named: "editorText")],
-        .media: [UIImage.imageFromCameraBundle(named: "editorMedia")],
+        .text: [CameraSettings().editorTextIcon ?? UIImage.imageFromCameraBundle(named: "editorText")],
+        .media: [CameraSettings().editorMediaIcon ?? UIImage.imageFromCameraBundle(named: "editorMedia")],
         .drawing: [UIImage.imageFromCameraBundle(named: "editorDraw")],
     ]
     
@@ -98,8 +98,8 @@ public struct KanvasImages {
             UIImage.imageFromCameraBundle(named: "menuGifOn"),
         ],
         .filter: [UIImage.imageFromCameraBundle(named: "menuFilters")],
-        .text: [UIImage.imageFromCameraBundle(named: "menuText")],
-        .media: [UIImage.imageFromCameraBundle(named: "menuMedia")],
+        .text: [CameraSettings().editorTextIcon ?? UIImage.imageFromCameraBundle(named: "menuText")],
+        .media: [CameraSettings().editorMediaIcon ?? UIImage.imageFromCameraBundle(named: "menuMedia")],
         .drawing: [UIImage.imageFromCameraBundle(named: "menuDrawing")],
     ]
     
@@ -126,10 +126,10 @@ public struct KanvasImages {
     static let sharpieRoundedImage = UIImage.imageFromCameraBundle(named: "sharpieRounded")
     static let pencilImage = UIImage.imageFromCameraBundle(named: "pencil")
     static let pencilRoundedImage = UIImage.imageFromCameraBundle(named: "pencilRounded")
-    static let gradientImage = UIImage.imageFromCameraBundle(named: "gradient")
-    static let closeGradientImage = UIImage.imageFromCameraBundle(named: "closeGradient")
+    static let gradientImage = CameraSettings().drawGradientIcon ?? UIImage.imageFromCameraBundle(named: "gradient")
+    static let closeGradientImage = CameraSettings().drawCloseGradientIcon ??  UIImage.imageFromCameraBundle(named: "closeGradient")
     static let closeGradientRoundedImage = UIImage.imageFromCameraBundle(named: "closeGradientRounded")
-    static let eyeDropperImage = UIImage.imageFromCameraBundle(named: "eyeDropper")
+    static let eyeDropperImage = CameraSettings().drawEyeDropperIcon ??  UIImage.imageFromCameraBundle(named: "eyeDropper")
     static let eyeDropperRoundedImage = UIImage.imageFromCameraBundle(named: "eyeDropperRounded")
     static let dropImage = UIImage.imageFromCameraBundle(named: "drop")
     
@@ -137,18 +137,18 @@ public struct KanvasImages {
     static let fontImage = UIImage.imageFromCameraBundle(named: "font")
     static let fontBlockImage = UIImage.imageFromCameraBundle(named: "fontBlock")
     static let aligmentImages: [NSTextAlignment: UIImage?] = [
-        .left: UIImage.imageFromCameraBundle(named: "leftAlignment"),
-        .center: UIImage.imageFromCameraBundle(named: "centerAlignment"),
-        .right: UIImage.imageFromCameraBundle(named: "rightAlignment"),
+        .left: CameraSettings().textLeftAlignmentIcon ?? UIImage.imageFromCameraBundle(named: "leftAlignment"),
+        .center: CameraSettings().textCenterAlignmentIcon ?? UIImage.imageFromCameraBundle(named: "centerAlignment"),
+        .right: CameraSettings().textRightAlignmentIcon ?? UIImage.imageFromCameraBundle(named: "rightAlignment"),
     ]
     static let aligmentRoundedImages: [NSTextAlignment: UIImage?] = [
         .left: UIImage.imageFromCameraBundle(named: "leftAlignmentRounded"),
         .center: UIImage.imageFromCameraBundle(named: "centerAlignmentRounded"),
         .right: UIImage.imageFromCameraBundle(named: "rightAlignmentRounded"),
     ]
-    static let highlightUnselected = UIImage.imageFromCameraBundle(named: "highlightUnselected")
+    static let highlightUnselected = CameraSettings().textHighlightUnSelectedIcon ?? UIImage.imageFromCameraBundle(named: "highlightUnselected")
     static let highlightRoundedUnselected = UIImage.imageFromCameraBundle(named: "highlightRoundedUnselected")
-    static let highlightSelected = UIImage.imageFromCameraBundle(named: "highlightSelected")
+    static let highlightSelected = CameraSettings().textHighlightSelectedIcon ?? UIImage.imageFromCameraBundle(named: "highlightSelected")
     static let highlightRoundedSelected = UIImage.imageFromCameraBundle(named: "highlightRoundedSelected")
     static func highlightImage(for selected: Bool) -> UIImage? {
         return selected ? highlightSelected : highlightUnselected
