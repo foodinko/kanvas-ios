@@ -166,7 +166,7 @@ final class TrashView: IgnoreTouchesView {
         closedTrash.translatesAutoresizingMaskIntoConstraints = false
         closedTrash.contentMode = .scaleAspectFit
         closedTrash.clipsToBounds = true
-        closedTrash.image = KanvasDesign.shared.trashViewClosedImage
+        closedTrash.image = CameraSettings().editorTrashClosedIcon
         
         let height = KanvasDesign.shared.trashViewClosedIconHeight
         let width = KanvasDesign.shared.trashViewClosedIconWidth
