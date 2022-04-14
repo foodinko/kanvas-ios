@@ -318,29 +318,6 @@ public struct CameraFeatures {
         
     /// 사진 편집 화면에서 Confirm Button의 Label Font에 사용.
     public var confirmButtonFont: UIFont = UIFont.boldSystemFont(ofSize: 18)
-    
-    /// 상단 뒤로가기 메뉴
-    public var backIcon: UIImage? = nil
-    /// 상단 텍스트 메뉴
-    public var editorTextIcon: UIImage? = nil
-    /// 상단 스티커 메뉴
-    public var editorMediaIcon: UIImage? = nil
-    /// 텍스트 편집 확인 버튼
-    public var editorConfirmIcon: UIImage? = nil
-    /// 텍스트 aligment
-    public var textCenterAlignmentIcon: UIImage? = nil
-    public var textLeftAlignmentIcon: UIImage? = nil
-    public var textRightAlignmentIcon: UIImage? = nil
-    /// 텍스트 배경색
-    public var textHighlightSelectedIcon: UIImage? = nil
-    public var textHighlightUnSelectedIcon: UIImage? = nil
-    /// 색상 선택 관련
-    public var drawGradientIcon: UIImage? = nil
-    public var drawCloseGradientIcon: UIImage? = nil
-    public var drawEyeDropperIcon: UIImage? = nil
-    /// 쓰레기통
-    public var editorTrashOpendIcon: UIImage? = nil
-    public var editorTrashClosedIcon: UIImage? = nil
 
     override public init() { }
 
