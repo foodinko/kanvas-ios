@@ -1,6 +1,6 @@
 <img width="200" align="right" src="https://github.com/tumblr/kanvas-ios/blob/main/images/kanvy-grin.png?raw=true" alt="kanvy">
 
-# Kanvas
+# Kanvas : Using in FeedList at FDKO
 
 <a href="https://app.circleci.com/pipelines/github/tumblr/kanvas-ios?branch=main"><img src="https://circleci.com/gh/tumblr/kanvas-ios.svg?branch=main&style=svg" alt="Kanvas Build Status"></a>
 
